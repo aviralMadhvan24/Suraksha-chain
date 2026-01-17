@@ -28,6 +28,11 @@ export function calculateRisk (input : RiskInput) : RiskResult {
     riskLevel === 'MEDIUM' ? 'WARN' :
     'PROCEED';
     
+    if (input.registryHit) {
+    score += 0.5;
+    reasons.push('Recipient reported in fraud registry');
+    }
+
      return {
     riskScore: score,
     riskLevel,

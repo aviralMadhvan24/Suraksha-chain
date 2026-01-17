@@ -1,0 +1,14 @@
+[
+  {
+    "inputs": [{ "internalType": "bytes32", "name": "identifierHash", "type": "bytes32" }],
+    "name": "isFraud",
+    "outputs": [
+      { "internalType": "bool", "name": "verified", "type": "bool" },
+      { "internalType": "uint256", "name": "reportCount", "type": "uint256" },
+      { "internalType": "uint256", "name": "firstReportedAt", "type": "uint256" },
+      { "internalType": "uint256", "name": "lastReportedAt", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
