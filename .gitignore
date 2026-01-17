@@ -1,0 +1,19 @@
+# Node
+node_modules/
+
+# Backend
+backend/node_modules/
+backend/dist/
+
+# Contracts (Hardhat)
+contracts/node_modules/
+contracts/artifacts/
+contracts/cache/
+contracts/typechain/
+contracts/coverage/
+
+# Env
+.env
+
+# Logs
+npm-debug.log*
