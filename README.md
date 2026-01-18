@@ -12,7 +12,10 @@
 [![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?logo=ethereum&logoColor=white)](https://ethereum.org/)
 [![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-FFDB1C)](https://hardhat.org/)
 [![Ethereum](https://img.shields.io/badge/Testnet-Sepolia-6c5ce7)](https://sepolia.dev/)
+[![Nodemon](https://img.shields.io/badge/Nodemon-76D04B?logo=nodemon&logoColor=white)](https://nodemon.io/)
 
+🧪 **Smart contracts are tested on Hardhat local testnet for development.**  
+🌐 **Sepolia testnet is recommended for public testing and backend integration.**
 
 
 [Features](#-key-features) • [Architecture](#-architecture--flow) • [API](#-api-reference) • [Security](#-security--privacy) • [Roadmap](#-future-roadmap)
@@ -41,19 +44,19 @@ Digital fraud is evolving faster than traditional defenses can adapt. Current fr
 ##  Architecture & Flow
 ```mermaid
 graph TB
-    A[📞 Incoming Call] --> B{Call Analysis Engine}
-    B --> C[🧠 AI AnalysisGoogle Gemini]
-    B --> D[📋 Heuristic Rules]
+    A[ Incoming Call] --> B{Call Analysis Engine}
+    B --> C[ AI Analysis - Google Gemini]
+    B --> D[ Heuristic Rules]
     
     C --> E[Risk Score Generator]
     D --> E
     
-    E --> F[(Redis MemoryTTL: 15min)]
+    E --> F[(Redis Memory - TTL: 15min)]
     
     G[💳 UPI Transaction Initiated] --> H[Risk Assessment Engine]
     
     H --> F
-    H --> I[⛓️ Blockchain RegistryEthereum]
+    H --> I[⛓️ Blockchain Registry - Ethereum]
     
     F -.->|Recent Call Context| H
     I -.->|Historical Patterns| H
@@ -95,6 +98,7 @@ graph TB
 | Layer | Technologies |
 |:-----:|:------------|
 | **Backend** | ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white) |
+| **Dev Tooling** | ![Nodemon](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=nodemon&logoColor=white) |
 | **AI/ML** | ![Google Gemini](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white) |
 | **Cache** | ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white) |
 | **Blockchain** | ![Solidity](https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white) ![Hardhat](https://img.shields.io/badge/Hardhat-FFF04D?style=for-the-badge&logo=ethereum&logoColor=black) ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=ethereum&logoColor=white) |
@@ -161,28 +165,27 @@ Immutable, privacy-preserving registry on Ethereum stores hashed fraud patterns.
 **POST** `/api/v1/analyze-call`
 
 Analyzes incoming call metadata to detect potential scam patterns.
+
 ```json
 {
-  "phoneNumber": "+919876543210",
-  "callDuration": 145,
-  "callMetadata": {
-    "urgencyKeywords": ["arrest", "police", "immediate"],
-    "requestedPayment": true,
-    "impersonationDetected": "law_enforcement"
-  }
+  "userId": "u1",
+  "transcript": "This is CBI. Your account will be frozen unless you pay now."
 }
 ```
 
 **Response:**
 ```json
 {
-  "riskScore": 0.87,
-  "classification": "HIGH_RISK",
-  "explanation": "Call exhibits digital arrest scam patterns: authority impersonation, urgency tactics, and payment demand",
-  "ttl": 900,
-  "detectionMethod": "hybrid_ai_heuristic",
-  "confidence": 0.92,
-  "timestamp": "2024-01-19T14:30:00Z"
+    "scamDetected": true,
+    "scamType": "DIGITAL_ARREST",
+    "confidence": 0.95,
+    "signals": [
+        "Authority Impersonation",
+        "Fear Tactic",
+        "Urgency",
+        "Financial Threat"
+    ],
+    "analysisSource": "HYBRID_AI"
 }
 ```
 
@@ -195,47 +198,23 @@ Analyzes incoming call metadata to detect potential scam patterns.
 Evaluates transaction risk by correlating with recent call analysis and blockchain registry.
 ```json
 {
-  "senderPhone": "+919876543210",
-  "recipientIdentifier": "scammer@upi",
-  "amount": 200000,
-  "timestamp": 1705680000
+  "userId": "u1",
+  "upiId": "random@upi",
+  "amount": 5000
 }
+
 ```
 
 **Response (High Risk):**
 ```json
 {
-  "riskLevel": "HIGH",
-  "overallScore": 0.91,
-  "shouldBlock": false,
-  "shouldWarn": true,
-  "delaySeconds": 30,
-  "factors": [
-    {
-      "type": "recent_suspicious_call",
-      "weight": 0.45,
-      "detail": "Scam call detected 47 seconds ago from same device"
-    },
-    {
-      "type": "registry_match",
-      "weight": 0.30,
-      "detail": "Recipient identifier flagged in fraud registry"
-    },
-    {
-      "type": "behavioral_anomaly",
-      "weight": 0.16,
-      "detail": "Large transaction immediately after call—unusual pattern"
-    }
-  ],
-  "userMessage": "⚠️ HIGH FRAUD RISK: A suspicious call was detected moments ago. This transaction shows multiple red flags. Please verify the recipient independently before proceeding.",
-  "educationalContent": {
-    "scamType": "digital_arrest",
-    "preventionTips": [
-      "Verify caller identity through official channels",
-      "Law enforcement never demands immediate payment",
-      "Take time to consult family/friends"
-    ]
-  }
+    "riskScore": 0.7,
+    "riskLevel": "HIGH",
+    "reasons": [
+        "Payment to a new recipient",
+        "Recent DIGITAL_ARREST scam call detected"
+    ],
+    "recommendedAction": "DELAY"
 }
 ```
 
@@ -313,6 +292,19 @@ Evaluates transaction risk by correlating with recent call analysis and blockcha
 ##  Future Roadmap
 
 <details>
+<summary><b>Phase 0: User Interface & Integration (Current Focus)</b></summary>
+
+<br>
+
+- [ ] **Minimal Web Dashboard**: React-based interface to visualize risk scores and explanations
+- [ ] **Call Analysis View**: Display detected scam signals and confidence in human-readable form
+- [ ] **UPI Risk Warning Screen**: Simulated UPI flow showing warnings before transaction confirmation
+- [ ] **API Integration Layer**: Frontend consumption of backend risk APIs
+- [ ] **Design System**: Clear UX for high-risk vs low-risk scenarios (alerts, delays, overrides)
+
+</details>
+    <details>
+
 <summary><b>Phase 1: Enhanced Intelligence (Q2 2024)</b></summary>
 
 <br>
@@ -374,9 +366,6 @@ npm install
 # Configure environment
 cp .env.example .env
 # Edit .env with your Redis, Gemini API, and Ethereum credentials
-
-# Run database migrations
-npm run migrate
 
 # Start development server
 npm run dev
