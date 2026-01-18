@@ -6,12 +6,14 @@
 
 **Preventing fraud before money moves—by correlating scam calls with payment intent in real time**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?logo=ethereum&logoColor=white)](https://ethereum.org/)
 [![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-FFDB1C)](https://hardhat.org/)
+[![Ethereum](https://img.shields.io/badge/Testnet-Sepolia-6c5ce7)](https://sepolia.dev/)
+
+
 
 [Features](#-key-features) • [Architecture](#-architecture--flow) • [API](#-api-reference) • [Security](#-security--privacy) • [Roadmap](#-future-roadmap)
 
@@ -19,7 +21,7 @@
 
 ---
 
-## 🚨 The Problem
+##  The Problem
 
 Digital fraud is evolving faster than traditional defenses can adapt. Current fraud prevention systems suffer from critical gaps:
 
@@ -36,7 +38,7 @@ Digital fraud is evolving faster than traditional defenses can adapt. Current fr
 
 ---
 
-## 🏗️ Architecture & Flow
+##  Architecture & Flow
 ```mermaid
 graph TB
     A[📞 Incoming Call] --> B{Call Analysis Engine}
@@ -101,19 +103,19 @@ graph TB
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 <table>
 <tr>
 <td width="50%">
 
-### 🧠 Hybrid AI Call Analysis
+###  Hybrid AI Call Analysis
 Combines rule-based heuristics with Google Gemini LLM for nuanced scam detection. Analyzes patterns like urgency keywords, authority impersonation, and payment demands without relying solely on expensive API calls.
 
 </td>
 <td width="50%">
 
-### ⏱️ Temporal Risk Memory
+###  Temporal Risk Memory
 Redis-backed short-term memory (15-min TTL) links phone identifiers to risk events. Enables cross-channel correlation between incoming calls and outgoing payments—the critical innovation.
 
 </td>
@@ -121,7 +123,7 @@ Redis-backed short-term memory (15-min TTL) links phone identifiers to risk even
 <tr>
 <td width="50%">
 
-### 🎯 Explainable Risk Scoring
+###  Explainable Risk Scoring
 Multi-factor risk engine provides transparent scores with human-readable explanations:
 - Recent suspicious call detected (45%)
 - Phone in fraud registry (30%)
@@ -131,7 +133,7 @@ Multi-factor risk engine provides transparent scores with human-readable explana
 </td>
 <td width="50%">
 
-### ⛓️ Blockchain Fraud Registry
+###  Blockchain Fraud Registry
 Immutable, privacy-preserving registry on Ethereum stores hashed fraud patterns. Enables community-driven intelligence without exposing PII. Validator roles ensure data quality.
 
 </td>
@@ -139,7 +141,7 @@ Immutable, privacy-preserving registry on Ethereum stores hashed fraud patterns.
 <tr>
 <td colspan="2">
 
-### 🔒 Privacy-First Design
+###  Privacy-First Design
 - Phone numbers stored as SHA-256 hashes only
 - No call recordings or transcripts retained
 - TTL-based automatic data expiry (15 minutes)
@@ -152,7 +154,7 @@ Immutable, privacy-preserving registry on Ethereum stores hashed fraud patterns.
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### Analyze Call Endpoint
 
@@ -239,7 +241,7 @@ Evaluates transaction risk by correlating with recent call analysis and blockcha
 
 ---
 
-## 🔐 Security & Privacy
+##  Security & Privacy
 
 <details>
 <summary><b>Privacy Guarantees</b></summary>
@@ -282,7 +284,7 @@ Evaluates transaction risk by correlating with recent call analysis and blockcha
 
 ---
 
-## 🎯 Why This Is Different
+##  Why This Is Different
 
 > ### **Most fraud prevention happens *after* money is gone. Suraksha Chain prevents fraud *before* it happens.**
 
@@ -308,7 +310,7 @@ Evaluates transaction risk by correlating with recent call analysis and blockcha
 
 ---
 
-## 🗺️ Future Roadmap
+##  Future Roadmap
 
 <details>
 <summary><b>Phase 1: Enhanced Intelligence (Q2 2024)</b></summary>
@@ -361,10 +363,10 @@ Evaluates transaction risk by correlating with recent call analysis and blockcha
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/suraksha-chain.git
+git clone https://github.com/aviralMadhvan24/Suraksha-chain.git
 
 # Install dependencies
 npm install
@@ -380,26 +382,21 @@ npm run migrate
 npm run dev
 
 # Deploy smart contracts (testnet)
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/deploy.js --network sepolia
 ```
 
 ---
 
-## 📄 License
+**Smart contracts are fully tested on Hardhat local testnet.**  
+**Deployment to Sepolia testnet is recommended for public testing and integration.**
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+##  Author
 
----
+**Aviral Madhvan**  
+*Full-Stack Developer*
 
-## 👨‍💻 Author
-
-**[Your Name]**  
-*Blockchain Security Researcher & Full-Stack Developer*
-
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/yourhandle)
-
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aviralMadhvan24)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aviral-madhvan-801481218/)
 ---
 
 <div align="center">
