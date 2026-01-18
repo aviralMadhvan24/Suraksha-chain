@@ -6,6 +6,8 @@ export interface RiskInput {
     amount? : number ; 
     isNewPayee ? : boolean ; 
     recentScamCall? : boolean ; 
+    recentScamConfidence? : number ; 
+    recentScamType? : string ; 
     callKeywords? : string [] ; 
     registryHit? : boolean ;
 }
