@@ -1,98 +1,109 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { router } from "expo-router";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+export default function Home() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Aviral Madhvan</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.title}>Suraksha Chain</Text>
+        <Text style={styles.subtitle}>
+          Real-time scam detection before money moves
+        </Text>
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* Main Card */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Start Protection</Text>
+        <Text style={styles.cardDesc}>
+          Analyze suspicious calls and prevent fraudulent UPI payments in real
+          time.
+        </Text>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.primaryButton,
+            pressed && { opacity: 0.85 },
+          ]}
+          onPress={() => router.push("/analyze-call")}
+        >
+          <Text style={styles.primaryButtonText}>
+            Analyze Scam Call
+          </Text>
+        </Pressable>
+      </View>
+
+      {/* Footer */}
+      <Text style={styles.footer}>
+        Privacy-first • No audio stored • No PII persisted
+      </Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#0f172a", // dark navy
+    padding: 24,
+    justifyContent: "space-between",
   },
-  stepContainer: {
-    gap: 8,
+
+  header: {
+    marginTop: 40,
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#f8fafc",
+  },
+
+  subtitle: {
+    fontSize: 14,
+    color: "#94a3b8",
+    marginTop: 6,
+  },
+
+  card: {
+    backgroundColor: "#020617",
+    borderRadius: 16,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: "#1e293b",
+  },
+
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#e5e7eb",
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  cardDesc: {
+    fontSize: 14,
+    color: "#9ca3af",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+
+  primaryButton: {
+    backgroundColor: "#2563eb",
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+
+  primaryButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  footer: {
+    textAlign: "center",
+    fontSize: 12,
+    color: "#64748b",
+    marginBottom: 10,
   },
 });
