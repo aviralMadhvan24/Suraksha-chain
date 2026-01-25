@@ -394,6 +394,6 @@ npx hardhat run scripts/deploy.js --network sepolia
 
 If this project helps you or your community, please consider ⭐ starring the repository!
 
-[Report Bug](https://github.com/yourusername/suraksha-chain/issues) • [Request Feature](https://github.com/yourusername/suraksha-chain/issues) • [Contribute](CONTRIBUTING.md)
+[Report Bug](https://github.com/aviralMadhvan24/Suraksha-chain/issues) • [Request Feature](https://github.com/aviralMadhvan24/Suraksha-chain/issues) • [Contribute](CONTRIBUTING.md)
 
 </div>
